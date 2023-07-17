@@ -5,6 +5,11 @@
 //  - descrizione
 // Creare un carosello come nella foto allegata.
 
+const myCaruselContainer = document.querySelector(".my-carusel-container");
+const myImgCaruselContainer = document.querySelector(".my-img-carusel-container");
+const myTitle = document.querySelector(".my-title");
+const myText = document.querySelector(".my-text");
+
 const images = [
     {
         image: 'img/01.webp',
@@ -41,10 +46,32 @@ const images = [
 // l’immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
 
 
+
+
+for (let i = 0; i < images.length; i++) {
+    const currentImage = images[i];
+    let classActive = "";
+
+    if (i === 0) {
+        classActive = "active"
+    };
+
+    myCaruselContainer.innerHTML += `<img class="my-img-carusel ${classActive}" src="${currentImage.image}" alt="">`;
+    myTitle.innerHTML += `<h3 class="${classActive}">${currentImage.title}</h3>`;
+    myText.innerHTML += `<p class="${classActive}">${currentImage.text}</p>`;
+
+    console.log(currentImage.image);
+    console.log(myTitle);
+    console.log(myText);
+};
+
+
+
+
 // Milestone 2:
-// Aggiungere il **ciclo infinito** del carosello. 
-// Ovvero se la miniatura attiva è la prima e l’utente clicca la freccia verso destra, 
-// la miniatura che deve attivarsi sarà l’ultima e viceversa per 
+// Aggiungere il **ciclo infinito** del carosello.
+// Ovvero se la miniatura attiva è la prima e l’utente clicca la freccia verso destra,
+// la miniatura che deve attivarsi sarà l’ultima e viceversa per
 // l’ultima miniatura se l’utente clicca la freccia verso sinistra.
 
 
