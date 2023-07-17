@@ -1,3 +1,4 @@
+"use strict"
 
 // Dato un array di oggetti letterali con:
 //  - url dell’immagine
@@ -45,9 +46,6 @@ const images = [
 // Al click dell’utente sulle frecce verso sinistra o destra, 
 // l’immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
 
-
-
-
 for (let i = 0; i < images.length; i++) {
     const currentImage = images[i];
     let classActive = "";
@@ -57,16 +55,9 @@ for (let i = 0; i < images.length; i++) {
     };
 
     myCaruselContainer.innerHTML += `<img class="my-img-carusel ${classActive}" src="${currentImage.image}" alt="">`;
-    myTitle.innerHTML += `<h3 class="${classActive}">${currentImage.title}</h3>`;
-    myText.innerHTML += `<p class="${classActive}">${currentImage.text}</p>`;
 
     console.log(currentImage.image);
-    console.log(myTitle);
-    console.log(myText);
 };
-
-
-
 
 // Milestone 2:
 // Aggiungere il **ciclo infinito** del carosello.
@@ -74,4 +65,50 @@ for (let i = 0; i < images.length; i++) {
 // la miniatura che deve attivarsi sarà l’ultima e viceversa per
 // l’ultima miniatura se l’utente clicca la freccia verso sinistra.
 
+// bisogna mettere qui i button perche` vengono cancellati e ricreati se vengo scritti prima del for
+// ma se non si usa .innerHTML si possono scrivere sopra
+const leftButton = document.querySelector("#btn-left");
+const rightButton = document.querySelector("#btn-right");
+let currentImgIndex = 0;
 
+rightButton.addEventListener("click", function () {
+    console.log("cliccato right");
+
+    // recupero tutti gli elementi con quella classe
+    const imageListElements = document.querySelectorAll(".my-img-carusel");
+    console.log(imageListElements[currentImgIndex]);
+
+    // tolgo classe active
+    imageListElements[currentImgIndex].classList.remove("active");
+
+    // incremento il contatore
+    currentImgIndex++;
+
+    if (currentImgIndex > imageListElements.lenght - 1) {
+        currentImgIndex = 0;
+    };
+
+    // l'index e aumentato e lo uso per assegnare la classe active
+    imageListElements[currentImgIndex].classList.add("active");
+});
+
+
+leftButton.addEventListener("click", function () {
+    console.log("cliccato left");
+
+    // recupero tutti gli elementi con quella classe
+    const imageListElements = document.querySelectorAll(".my-img-carusel");
+
+    // tolgo classe active
+    imageListElements[currentImgIndex].classList.remove("active");
+
+    // incremento il contatore
+    currentImgIndex--;
+
+    if (currentImgIndex < 0) {
+        currentImgIndex = imageListElements.lenght - 1;
+    };
+
+    // l'index e aumentato e lo uso per assegnare la classe active
+    imageListElements[currentImgIndex].classList.add("active");
+});
